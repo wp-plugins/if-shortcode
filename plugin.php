@@ -4,10 +4,11 @@ Plugin Name: If Shortcode
 Author: geomagas
 Description: Provides an "if" shortcode to conditionally render content
 Text Domain: if-shortcode
-Version: 0.1.0
+Version: 0.2.0
 */
 
 $if_shortcode_filter_prefix='evaluate_condition_';
+$if_shortcode_block=NULL;
 
 add_shortcode('if','process_if_shortcode');
 
@@ -23,7 +24,33 @@ function process_if_shortcode($atts,$content)
 		$evaluate=apply_filters("{$if_shortcode_filter_prefix}{$condition}",false);
 		$result|=$evaluate==$mustbe;
 		}
-	return ($result?do_shortcode($content):'');
+	global $if_shortcode_block;
+	$save_block=$if_shortcode_block;
+	$if_shortcode_block=array('result'=>$result,'else'=>'',);
+	$then=do_shortcode($content);
+	$else=$if_shortcode_block['else'];
+	$if_shortcode_block=$save_block;
+	return $result?$then:$else;
+	}
+	
+add_shortcode('else','process_else_shortcode');
+
+function process_else_shortcode($atts,$content)
+	{
+	global $if_shortcode_block;
+	if($if_shortcode_block&&!$if_shortcode_block['result'])
+		$if_shortcode_block['else'].=do_shortcode($content);
+	return '';
+	}
+	
+add_shortcode('eitherway','process_eitherway_shortcode');
+
+function process_eitherway_shortcode($atts,$content)
+	{
+	$content=do_shortcode($content);
+	global $if_shortcode_block;
+	if($if_shortcode_block) $if_shortcode_block['else'].=$content;
+	return $content;
 	}
 	
 // add supported conditional tags

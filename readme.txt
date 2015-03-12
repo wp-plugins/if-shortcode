@@ -1,9 +1,9 @@
 === If Shortcode ===
 Contributors: geomagas
-Tags: if, shortcode, conditional
+Tags: if, shortcode, conditional, else, content, conditional tags
 Requires at least: 3.0.1
-Tested up to: 3.8.1
-Stable tag: trunk
+Tested up to: 4.1.1
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5SD6XG9JD5TS8
@@ -25,6 +25,19 @@ as true.
 For example, suppose that we want to include a sentence in a post, but only for anonymous visitors:
 
 	[if is_user_logged_in=no]The Sentence.[/if]
+	
+It also provides an [else] shortcode and an [eitherway] one for use inside [if] blocks. [else] will render its content if 
+the condition evaluates to false, and [eitherway] will render its content regardless of the evaluation result. When used 
+outside an [if] block, these shortcodes behave as if the whole content is surrounded by an [if] shortcode whose condition
+evaluates to true. In other words, an [else] shortcode would not render any content, while a [eitherway] one would. You can 
+use as many of these shortcodes as you like in a single [if] block, which gives you the ability to do things like:
+
+		- Am I logged in?
+		[if is_user_logged_in]- Yes you are.
+		[else]- No you are not.
+		[/else][eitherway]- I'm sorry, what?
+		[/eitherway]- I said YOU A-R-E LOGGED IN!!!
+		[else]- YOU ARE NOT LOGGED IN!!! What's the matter with you?[/else][/if]
 
 A multitude of conditions are supported out-of-the-box. The following evaluate to the result of the corresponding 
 WordPress Conditional Tag, using the no-parameter syntax:
@@ -78,6 +91,10 @@ e.g.
 1. Place `[if condition]{content}[/if]` shortcodes in your content
 
 == Changelog ==
+
+= 0.2.0 =
+* Addition: [else] shortcode
+* Addition: [eitherway] shortcode
 
 = 0.1.0 =
 * First release.
