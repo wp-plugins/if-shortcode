@@ -4,7 +4,7 @@ Plugin Name: If Shortcode
 Author: geomagas
 Description: Provides an "if" shortcode to conditionally render content
 Text Domain: if-shortcode
-Version: 0.2.0
+Version: 0.2.1
 */
 
 $if_shortcode_filter_prefix='evaluate_condition_';
@@ -83,8 +83,7 @@ function if_shortcode_conditional_tags()
 		'is_super_admin',
 		);
 	global $if_shortcode_filter_prefix;
-	foreach($supported as $tag)
-		add_filter("{$if_shortcode_filter_prefix}{$tag}",function()use($tag){return $tag();});
+	foreach($supported as $tag) add_filter("{$if_shortcode_filter_prefix}{$tag}",$tag);
 	}
 
 // normalize_empty_atts found here: http://wordpress.stackexchange.com/a/123073/39275
