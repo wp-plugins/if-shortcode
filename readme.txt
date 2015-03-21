@@ -3,7 +3,7 @@ Contributors: geomagas
 Tags: if, shortcode, conditional, else, content, conditional tags
 Requires at least: 3.0.1
 Tested up to: 4.1.1
-Stable tag: 0.2.0
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5SD6XG9JD5TS8
@@ -82,15 +82,12 @@ A big thanks to M Miller for the `normalize_empty_atts()` function found here: h
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload the `if-shortcode` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `[if condition]{content}[/if]` shortcodes in your content
+Install the plugin using [the usual method described in the codex](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins).
 
 == Changelog ==
+
+= 0.2.1 =
+* Improvement: Removed unnecessary closure from line 87 ([thanks datacate](https://wordpress.org/support/topic/installation-error-84)!)
 
 = 0.2.0 =
 * Addition: [else] shortcode
